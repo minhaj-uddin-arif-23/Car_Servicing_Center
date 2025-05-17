@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NavLink } from "react-router-dom";
 import {
   Wrench,
@@ -11,7 +12,10 @@ import {
   UserPlus,
 } from "lucide-react";
 import im1 from '../../src/assets/images/car.png'
+import { useContext, useState } from "react";
+import {AuthProvider as AuthContext} from "../authContext/AuthContext";
 export default function Navbar() {
+  const { user, signout } = useContext(AuthContext);
   return (
     <div>
       <div className="navbar px-4 md:px-10 lg:px-20 fixed z-50 bg-white/80 backdrop-blur-sm shadow-md text-gray-900">
@@ -121,22 +125,44 @@ export default function Navbar() {
         </div>
 
         {/* Auth Buttons */}
-        <div className="navbar-end gap-3 ">
-          <NavLink
-            to={"signin"}
-            className="btn btn-sm btn-primary btn-outline rounded-lg flex items-center gap-2"
-          >
-            <LogIn className="w-4 h-4" />
-            Sign In
-          </NavLink>
-          <NavLink
-            to={"signup"}
-            className="btn btn-sm btn-primary btn-outline  rounded-lg flex items-center gap-2"
-          >
-            <UserPlus className="w-4 h-4" />
-            Sign Up
-          </NavLink>
-        </div>
+   <div className="navbar-end gap-3">
+  {user ? (
+    <div className="flex items-center gap-3">
+      {/* Avatar */}
+      <img
+        src={user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"} // Fallback avatar
+        alt="User Avatar"
+        className="w-8 h-8 rounded-full border border-gray-300"
+      />
+
+      {/* Sign Out Button */}
+      <button
+        onClick={signout}
+        className="btn btn-sm btn-outline text-blue-600 rounded-lg"
+      >
+        Sign Out
+      </button>
+    </div>
+  ) : (
+    <>
+      <NavLink
+        to={"signin"}
+        className="btn btn-sm btn-primary btn-outline rounded-lg flex items-center gap-2"
+      >
+        <LogIn className="w-4 h-4" />
+        Sign In
+      </NavLink>
+      <NavLink
+        to={"signup"}
+        className="btn btn-sm btn-primary btn-outline  rounded-lg flex items-center gap-2"
+      >
+        <UserPlus className="w-4 h-4" />
+        Sign Up
+      </NavLink>
+    </>
+  )}
+</div>
+
       </div>
     </div>
   );

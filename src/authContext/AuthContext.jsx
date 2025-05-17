@@ -9,16 +9,17 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+// import axios from "axios";
 import auth from "../firebase/_firebase_init";
 
 // Create the context
-export const AuthContext = createContext();
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthProvider = createContext();
 
 // Google provider
 const provider = new GoogleAuthProvider();
 
-export default function AuthProvider({ children }) {
+export default function AuthContext({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,35 +56,36 @@ export default function AuthProvider({ children }) {
   const updateUserInfo = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo, // ✅ fixed typo
+      photoURL: photo,
     });
   };
 
   // Monitor auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser?.email) {
-        setUser(currentUser);
-        try {
-          await axios.post(
-            `${import.meta.env.VITE_API_URL}/jwt`,
-            { email: currentUser.email },
-            { withCredentials: true }
-          );
-        } catch (err) {
-          console.error("JWT POST failed:", err);
-        }
-      } else {
-        setUser(null);
-        try {
-          await axios.get(
-            `${import.meta.env.VITE_API_URL}/logout`,
-            { withCredentials: true }
-          );
-        } catch (err) {
-          console.error("Logout GET failed:", err);
-        }
-      }
+          setUser(currentUser)
+      // if (currentUser?.email) {
+      //   setUser(currentUser);
+      //   try {
+      //     await axios.post(
+      //       `${import.meta.env.VITE_API_URL}/jwt`,
+      //       { email: currentUser.email },
+      //       { withCredentials: true }
+      //     );
+      //   } catch (err) {
+      //     console.error("JWT POST failed:", err);
+      //   }
+      // } else {
+      //   setUser(null);
+      //   try {
+      //     await axios.get(
+      //       `${import.meta.env.VITE_API_URL}/logout`,
+      //       { withCredentials: true }
+      //     );
+      //   } catch (err) {
+      //     console.error("Logout GET failed:", err);
+      //   }
+      // }
       setLoading(false);
     });
 
@@ -102,8 +104,8 @@ export default function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={userInformation}>
+    <AuthProvider.Provider value={userInformation}>
       {children}
-    </AuthContext.Provider>
+    </AuthProvider.Provider>
   );
 }

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
-import { AuthContext } from "../authContext/AuthContext"; // adjust the path as needed
 import { useNavigate, NavLink } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import HomeNavbar from "./HomeNavbar";
+import {AuthProvider as AuthContext} from "../authContext/AuthContext";
 
 const Register = () => {
   const { createUser, updateUserInfo, google } = useContext(AuthContext);

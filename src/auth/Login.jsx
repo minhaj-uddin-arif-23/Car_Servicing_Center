@@ -1,9 +1,46 @@
-import React from "react";
-import HomeNavbar from "./HomeNavbar";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+
+
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+
+import toast from "react-hot-toast";
+
 import { FcGoogle } from "react-icons/fc";
+import HomeNavbar from "./HomeNavbar";
+import { AuthProvider as AuthContext} from "../authContext/AuthContext";
 
 export default function Login() {
+
+  
+  const navigate = useNavigate()
+  const location =useLocation()
+  const from = location?.state || '/'
+  const {signIn,google} = useContext(AuthContext)
+
+  const handleGoogle = async () => {
+   try{
+    await google()
+    toast.success("Sign in successfuly")
+    navigate(from,{replace:true})
+   }catch(err){
+    toast.error(err?.message)
+   }
+  }
+
+  const handleSignIn =async (e) => {
+    e.preventDefault()
+    const form = e.target;
+    const email= form.email.value
+    const password= form.password.value
+    console.log(email,password)
+    try{
+      await signIn(email,password)
+      toast.success("SignIn successfullt")
+      navigate(from , {replace:true})
+    }catch(err){
+      toast.error(err?.message)
+    }
+  }  
   return (
     <div className="min-h-[70vh] bg-gray-100 flex flex-col">
       {/* Navbar */}
@@ -21,7 +58,7 @@ export default function Login() {
           </h2>
    
 
-          <form className="space-y-5">
+          <form onSubmit={handleSignIn} className="space-y-5">
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -30,6 +67,7 @@ export default function Login() {
               <input
                 type="email"
                 id="email"
+                name="email"
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="you@example.com"
               />
@@ -43,6 +81,7 @@ export default function Login() {
               <input
                 type="password"
                 id="password"
+                name="password"
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="••••••••"
               />
@@ -75,7 +114,7 @@ export default function Login() {
       <div className="mt-8 text-center">
         <p className="text-gray-500 mb-4">Sign in with a social account</p>
         <div className="form-control mb-6 flex justify-center">
-          <button
+          <button onClick={handleGoogle}
             className="border-2 border-gray-200 text-2xl flex py-2 rounded-md px-4 hover:bg-gray-100 transition items-center"
           >
             <FcGoogle className="text-xl" />
