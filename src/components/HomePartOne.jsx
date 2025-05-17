@@ -7,7 +7,7 @@ export default function HomePartOne() {
         <img
           src="https://img.freepik.com/free-photo/auto-mechanic-checking-car_1303-14042.jpg"
           alt="Professional Car Servicing"
-          className="max-w-md lg:max-w-xl rounded-lg shadow-2xl"
+          className="    md:max-w-md lg:max-w-xl rounded-lg shadow-2xl"
         />
         <div className="lg:mr-10">
           <h1 className="text-5xl font-bold text-sky-700">
