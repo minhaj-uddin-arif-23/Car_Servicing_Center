@@ -10,7 +10,7 @@ import {
   LogIn,
   UserPlus,
 } from "lucide-react";
-
+import im1 from '../../src/assets/images/car.png'
 export default function Navbar() {
   return (
     <div>
@@ -76,15 +76,16 @@ export default function Navbar() {
   to={"/"}
   className="  flex items-center gap-2 font-bold text-blue-600 text-3xl lg:mr-10 md:mr-0 mr-7"
 >
-  <Wrench className="hidden md:block w-6 h-5 mt-1  text-black" />
- <span className="text-2xl md:text-3xl lg:text-2xl"> CarCare</span>
+
+  <span> <img src={im1} alt="" className="hidden md:block w-9 h-7 mt-1  text-black"/> </span>
+ <span className="text-2xl md:text-3xl lg:text-2xl"> Car<span className="text-sky-600">Care</span> </span>
 </NavLink>
 
 
         </div>
 
         {/* Desktop menu */}
-        <div className="navbar-center hidden lg:flex lg:mr-10 md:mr-0">
+        <div className="navbar-center hidden lg:flex lg: md:mr-0">
           <ul className="menu menu-horizontal px-1 font-semibold">
             <li>
               <NavLink to={"/"}>

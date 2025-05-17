@@ -1,10 +1,12 @@
 import React from 'react'
 import AboutSection from './about/AboutSection'
 import TestimonialSlider from './about/TestimonialSlider'
+import AboutUsHeader from './about/AboutUsHeader'
 
 export default function About() {
   return (
-    <div className='mt-20'>
+    <div className=''>
+      <AboutUsHeader />
       <AboutSection />
       <TestimonialSlider />
     </div>
