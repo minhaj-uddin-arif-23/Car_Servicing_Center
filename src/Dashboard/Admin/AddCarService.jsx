@@ -39,12 +39,15 @@ export default function AddCarService() {
       // email,
       date: startDate,
     };
-    console.log(title,image,desc,price);
+    console.log(title, image, desc, price);
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_KEY_LOCALHOST}/add-car-service`, CarService);
+      await axios.post(
+        `${import.meta.env.VITE_API_KEY_LOCALHOST}/add-car-service`,
+        CarService
+      );
       toast.success("Car Service added successfully");
-      navigate("/");
+      navigate("/service");
     } catch (err) {
       toast.error("Data not added");
     } finally {
@@ -54,7 +57,9 @@ export default function AddCarService() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-center text-4xl font-bold text-green-800 mb-4">Add Car Service</h1>
+      <h1 className="text-center text-4xl font-bold text-sky-800 mb-4">
+        Add Car Service
+      </h1>
       <hr className="border-b-2 border-green-800 w-1/2 mx-auto mb-8" />
 
       <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-300">
@@ -63,7 +68,9 @@ export default function AddCarService() {
             {/* Left Column */}
             <div className="space-y-4">
               <div>
-                <label className="block mb-1 font-medium text-gray-700">Service Image URL</label>
+                <label className="block mb-1 font-medium text-gray-700">
+                  Service Image URL
+                </label>
                 <input
                   name="image"
                   type="url"
@@ -74,7 +81,9 @@ export default function AddCarService() {
               </div>
 
               <div>
-                <label className="block mb-1 font-medium text-gray-700">Service Title</label>
+                <label className="block mb-1 font-medium text-gray-700">
+                  Service Title
+                </label>
                 <input
                   name="title"
                   type="text"
@@ -88,7 +97,9 @@ export default function AddCarService() {
             {/* Right Column */}
             <div className="space-y-4">
               <div>
-                <label className="block mb-1 font-medium text-gray-700">Description</label>
+                <label className="block mb-1 font-medium text-gray-700">
+                  Description
+                </label>
                 <textarea
                   name="desc"
                   placeholder="Write service description..."
@@ -97,7 +108,9 @@ export default function AddCarService() {
               </div>
 
               <div>
-                <label className="block mb-1 font-medium text-gray-700">Price</label>
+                <label className="block mb-1 font-medium text-gray-700">
+                  Price
+                </label>
                 <input
                   name="price"
                   type="number"
@@ -111,7 +124,9 @@ export default function AddCarService() {
 
           {/* Date Picker */}
           <div>
-            <label className="block mb-1 font-medium text-gray-700">Select Service Date</label>
+            <label className="block mb-1 font-medium text-gray-700">
+              Select Service Date
+            </label>
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
@@ -123,7 +138,7 @@ export default function AddCarService() {
           <div>
             <button
               type="submit"
-              className="btn bg-green-600 text-white font-semibold w-full hover:bg-green-700 transition"
+              className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-500 to-sky-600 rounded-lg hover:from-sky-600 hover:to-sky-700 transition duration-300"
             >
               {loading ? "Loading..." : "Add Service"}
             </button>

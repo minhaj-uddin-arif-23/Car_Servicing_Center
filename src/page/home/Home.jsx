@@ -6,6 +6,7 @@ import Feature from "../../components/Feature";
 import Vehicle from "../../components/Vehicle";
 import WhyChoseus from "../../components/WhyChoseus";
 import AutoRpairService from "../../service/AutoRpairService";
+import Home_service_card from "./homecard/Home_service_card";
 
 export default function Home() {
   return (
@@ -43,6 +44,9 @@ export default function Home() {
       </div>
       <div className="w-11/12 mx-auto">
         <AutoRpairService />
+      </div>
+      <div className="w-11/12 mx-auto">
+          <Home_service_card />
       </div>
       <div className="w-11/12 mx-auto">
         <WhyChoseus />

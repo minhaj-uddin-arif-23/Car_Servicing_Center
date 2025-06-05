@@ -11,7 +11,7 @@ import {
   LogIn,
   UserPlus,
 } from "lucide-react";
-import im1 from '../../src/assets/images/car.png';
+import im1 from "../../src/assets/images/car.png";
 import { useContext, useState } from "react";
 import { AuthProvider as AuthContext } from "../authContext/AuthContext";
 
@@ -89,7 +89,7 @@ export default function Navbar() {
                 className="hidden md:block w-9 h-7 mt-1 text-black"
               />
             </span>
-            <span className="text-2xl md:text-3xl lg:text-2xl">
+            <span className="text-2xl md:text-3xl lg:text-2xl ">
               Car<span className="text-sky-600">Care</span>
             </span>
           </NavLink>
@@ -135,7 +135,11 @@ export default function Navbar() {
         <div className="navbar-end gap-3">
           {user ? (
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
                 <div className="w-10 rounded-full ring ring-gray-300">
                   <img
                     src={user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}

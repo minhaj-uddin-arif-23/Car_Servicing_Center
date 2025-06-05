@@ -1,4 +1,3 @@
-// DashboardLayout.jsx
 import { NavLink, Outlet } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -7,13 +6,17 @@ import {
   Wrench,
   ClipboardList,
   UserPlus,
+  Menu,
+  X,
+  HomeIcon,
 } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthProvider as AuthContext } from "../authContext/AuthContext";
 
 export default function Sidebar() {
   const { user } = useContext(AuthContext);
-  const role = user?.role || "admin"; // You can determine role from context or backend
+  const role = user?.role || "admin";
+  const [isOpen, setIsOpen] = useState(false); // For mobile menu toggle
 
   const navItems = [
     {
@@ -43,6 +46,11 @@ export default function Sidebar() {
             label: "See All Users",
             icon: <UserPlus className="w-4 h-4 inline mr-2" />,
           },
+          {
+            path: "/",
+            label: "Go To Home",
+            icon: <HomeIcon className="w-4 h-4 inline mr-2" />,
+          },
         ]
       : [
           {
@@ -59,10 +67,28 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Mobile Header */}
+      <div className="flex justify-between items-center bg-white p-4 shadow-md md:hidden">
+        <h2 className="text-lg font-bold">Dashboard</h2>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-gray-600 focus:outline-none"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md p-5 hidden md:block">
-        <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+      <div
+        className={`${
+          isOpen ? "block" : "hidden"
+        } md:block md:w-64 bg-white shadow-md p-5 fixed md:static z-50 top-16 left-0 w-64 h-full min-h-screen overflow-y-auto transition-all`}
+      >
+        {" "}
+        <span className="text-2xl md:text-3xl lg:text-2xl font-semibold flex my-4 ">
+          Car<span className="text-sky-600">Care</span>
+        </span>
         <ul className="space-y-2">
           {navItems.map((item) => (
             <li key={item.path}>
@@ -73,6 +99,7 @@ export default function Sidebar() {
                     isActive ? "bg-gray-200 font-semibold" : ""
                   }`
                 }
+                onClick={() => setIsOpen(false)} // Close on mobile nav click
               >
                 {item.icon}
                 {item.label}
@@ -82,23 +109,8 @@ export default function Sidebar() {
         </ul>
       </div>
 
-      {/* Mobile Sidebar */}
-      <div className="md:hidden p-3 bg-white border-b shadow-sm w-full">
-        <select
-          className="w-full p-2 border rounded"
-          onChange={(e) => window.location.assign(e.target.value)}
-          defaultValue="/dashboard"
-        >
-          {navItems.map((item) => (
-            <option key={item.path} value={item.path}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-4 md:ml-64 mt-16 md:mt-0">
         <Outlet />
       </div>
     </div>
