@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../../Loading";
 import CarServiceCard from "../../CarServiceCard";
+import { NavLink } from "react-router-dom";
 
 export default function Home_service_card() {
   const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ export default function Home_service_card() {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_KEY_LOCALHOST}/show-all-car-service`
+        `${import.meta.env.VITE_API_KEY_LOCALHOST}/home-car-service`
       );
 
       setTimeout(() => {
@@ -29,6 +30,13 @@ export default function Home_service_card() {
   };
   return (
     <div>
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+          OUR SERVICE
+        </h2>
+        <div className="w-24 h-1 bg-blue-600 mx-auto mb-6" />
+      </div>
+
       <div className="max-w-7xl mx-auto ">
         {loading ? (
           <Loading />
@@ -39,6 +47,16 @@ export default function Home_service_card() {
             ))}
           </div>
         )}
+      </div>
+      <div>
+        <div className="mt-10 flex justify-center my-5">
+          <NavLink
+            to={"/service"}
+            className="btn btn-primary px-6 py-3 text-white rounded-md"
+          >
+            View All Service
+          </NavLink>
+        </div>
       </div>
     </div>
   );

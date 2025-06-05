@@ -45,11 +45,7 @@ export default function AutoRpairService() {
           ))}
         </div>
 
-        <div className="mt-10">
-          <button className="bg-blue-700 text-white px-6 py-3 rounded hover:bg-blue-800 transition">
-            VIEW ALL SERVICES
-          </button>
-        </div>
+       
       </div>
     </section>
   );
