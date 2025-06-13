@@ -14,6 +14,7 @@ import AddCarService from "../Dashboard/Admin/AddCarService";
 import ManageService from "../Dashboard/Admin/ManageService";
 import AllUser from "../Dashboard/Admin/AllUser";
 import DetailsCarService from "../components/service/DetailsCarService";
+import Payment from "../components/payment/Payment";
 
 const routers = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const routers = createBrowserRouter([
         element: <Contact />,
       },
     ],
+  },
+  {
+    path: "/payment",
+    element: <Payment />,
   },
   {
     path: "/signin",
