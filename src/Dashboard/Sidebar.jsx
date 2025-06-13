@@ -37,7 +37,7 @@ export default function Sidebar() {
             icon: <Hammer className="w-4 h-4 inline mr-2" />,
           },
           {
-            path: "/dashboard/manage-services",
+            path: "/dashboard/manage-service",
             label: "Manage Services",
             icon: <Wrench className="w-4 h-4 inline mr-2" />,
           },

@@ -13,6 +13,7 @@ import Admin_profile from "../Dashboard/Admin/Admin_profile";
 import AddCarService from "../Dashboard/Admin/AddCarService";
 import ManageService from "../Dashboard/Admin/ManageService";
 import AllUser from "../Dashboard/Admin/AllUser";
+import DetailsCarService from "../components/service/DetailsCarService";
 
 const routers = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const routers = createBrowserRouter([
         element: <UpcomingService />,
       },
       {
+        path: "/details/:id",
+        element: <DetailsCarService />,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_API_KEY_LOCALHOST}/details/${params.id}`
+          ),
+      },
+      {
         path: "/blog",
         element: <Blog />,
       },
@@ -46,36 +55,35 @@ const routers = createBrowserRouter([
     ],
   },
   {
-    path:'/signin',
-    element:<Login />
+    path: "/signin",
+    element: <Login />,
   },
   {
-    path:'/signup',
-    element:<Register />
+    path: "/signup",
+    element: <Register />,
   },
   {
-    path:'/dashboard',
-    element:<DashboardLayout />,
-    children:[
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
       {
-        path:'/dashboard/admin-profile',
-        element:<Admin_profile />
+        path: "/dashboard/admin-profile",
+        element: <Admin_profile />,
       },
-       {
-        path:'/dashboard/add-service',
-        element:<AddCarService />
+      {
+        path: "/dashboard/add-service",
+        element: <AddCarService />,
       },
-       {
-        path:'/dashboard/manage-service',
-        element:<ManageService />
+      {
+        path: "/dashboard/manage-service",
+        element: <ManageService />,
       },
-       {
-        path:'/dashboard/all-user',
-        element:<AllUser />
-      }
-    ]
-  }
-  
+      {
+        path: "/dashboard/all-users",
+        element: <AllUser />,
+      },
+    ],
+  },
 ]);
 
 export default routers;

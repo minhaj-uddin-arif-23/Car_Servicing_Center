@@ -48,9 +48,9 @@ export default function Service() {
           <Helmet>
             <title>Car service</title>
           </Helmet>
-          <h1 className="text-3xl font-semibold text-blue-600 my-4 ml-28 mt-24  mb-10">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-blue-600 my-4 ml-4 sm:ml-12 md:ml-28 mt-12 sm:mt-16 md:mt-24 mb-6 sm:mb-8 md:mb-10">
             All Car Services in Deals
-          </h1>{" "}
+          </h1>
         </div>
 
         {/*  fetch the data */}

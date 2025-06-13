@@ -1,5 +1,7 @@
+import { Link, NavLink } from "react-router-dom";
+
 export default function CarServiceCard({ data }) {
-  const { title, image, desc, price, date } = data || {};
+  const { _id, title, image, desc, price, date } = data || {};
 
   return (
     <div className="card w-72 rounded-2xl bg-gradient-to-br from-white via-blue-0 to-green-0 shadow-md hover:shadow-xl transition duration-300 border border-gray-200">
@@ -22,9 +24,12 @@ export default function CarServiceCard({ data }) {
           </p>
         )}
         <div className="flex justify-end mt-4">
-          <button className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-500 to-sky-600 rounded-lg hover:from-sky-600 hover:to-sky-700 transition duration-300">
+          <Link
+            to={`/details/${_id}`}
+            className="px-4 py-2 text-sm btn font-medium text-white bg-gradient-to-r from-sky-500 to-sky-600 rounded-lg hover:from-sky-600 hover:to-sky-700 transition duration-300"
+          >
             Book Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>

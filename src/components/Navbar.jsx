@@ -59,11 +59,7 @@ export default function Navbar() {
                   <Hammer className="w-4 h-4 mr-1" /> Service
                 </NavLink>
               </li>
-              <li>
-                <NavLink to={"/upcomingservice"}>
-                  <CalendarClock className="w-4 h-4 mr-1" /> Upcoming
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink to={"/blog"}>
                   <FileText className="w-4 h-4 mr-1" /> Blog
@@ -113,11 +109,7 @@ export default function Navbar() {
                 <Hammer className="w-4 h-4 mr-1" /> Service
               </NavLink>
             </li>
-            <li>
-              <NavLink to={"/upcomingservice"}>
-                <CalendarClock className="w-4 h-4 mr-1" /> Upcoming
-              </NavLink>
-            </li>
+
             <li>
               <NavLink to={"/blog"}>
                 <FileText className="w-4 h-4 mr-1" /> Blog

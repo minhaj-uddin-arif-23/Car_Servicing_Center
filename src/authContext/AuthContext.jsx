@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 // import axios from "axios";
 import auth from "../firebase/_firebase_init";
+import axios from "axios";
 
 // Create the context
 // eslint-disable-next-line react-refresh/only-export-components
@@ -59,39 +60,6 @@ export default function AuthContext({ children }) {
       photoURL: photo,
     });
   };
-
-  // Monitor auth state
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-          setUser(currentUser)
-      // if (currentUser?.email) {
-      //   setUser(currentUser);
-      //   try {
-      //     await axios.post(
-      //       `${import.meta.env.VITE_API_URL}/jwt`,
-      //       { email: currentUser.email },
-      //       { withCredentials: true }
-      //     );
-      //   } catch (err) {
-      //     console.error("JWT POST failed:", err);
-      //   }
-      // } else {
-      //   setUser(null);
-      //   try {
-      //     await axios.get(
-      //       `${import.meta.env.VITE_API_URL}/logout`,
-      //       { withCredentials: true }
-      //     );
-      //   } catch (err) {
-      //     console.error("Logout GET failed:", err);
-      //   }
-      // }
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   const userInformation = {
     user,
     loading,
@@ -102,6 +70,30 @@ export default function AuthContext({ children }) {
     passWordReset,
     updateUserInfo,
   };
+  // Monitor auth state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      // setUser(currentUser)
+      if (currentUser?.email) {
+        setUser(currentUser);
+        await axios.post(
+          `${import.meta.env.VITE_API_KEY_LOCALHOST}/jwt`,
+          { email: currentUser?.email },
+          { withCredentials: true }
+        );
+      } else {
+        // remove from the server side
+        setUser(currentUser);
+        await axios.get(`${import.meta.env.VITE_API_KEY_LOCALHOST}/logout`, {
+          withCredentials: true,
+        });
+      }
+      setLoading(false);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <AuthProvider.Provider value={userInformation}>
